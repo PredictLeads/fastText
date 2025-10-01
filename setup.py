@@ -21,7 +21,7 @@ import subprocess
 import platform
 import io
 
-__version__ = "0.9.2"
+__version__ = "0.9.4"
 FASTTEXT_SRC = "src"
 
 # Based on https://github.com/pybind/python_example
@@ -80,9 +80,11 @@ ext_modules = [
         ],
         language="c++",
         extra_compile_args=[
-            "-O0 -fno-inline -fprofile-arcs -pthread -march=native"
-            if coverage
-            else "-O3 -funroll-loops -pthread -march=native"
+            (
+                "-O0 -fno-inline -fprofile-arcs -pthread -march=native"
+                if coverage
+                else "-O3 -funroll-loops -pthread -march=native"
+            )
         ],
     ),
 ]
@@ -194,7 +196,7 @@ setup(
         "Operating System :: Unix",
         "Operating System :: MacOS",
     ],
-    install_requires=["pybind11>=2.2", "setuptools >= 0.7.0", "numpy"],
+    install_requires=["pybind11>=2.2", "setuptools >= 70.0.0", "numpy>=2.3.3"],
     cmdclass={"build_ext": BuildExt},
     packages=[
         str("fasttext"),
